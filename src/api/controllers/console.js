@@ -47,10 +47,10 @@ const updateConsole = async(req, res, next) => {
     try {
         const { id } = req.params;
         const oldConsole = await Console.findById(id);
-        const updateConsole = new Console(req.body);
-        updateConsole._id = id;
-        updateConsole.videogames = [...oldConsole.videogames, ...updateConsole.videogames];
-        const update = await Console.findByIdAndUpdate(id, updateConsole, { new: true });
+        const newConsole = new Console(req.body);
+        newConsole._id = id;
+        newConsole.videogames = [...oldConsole.videogames, ...req.body.videogames];
+        const update = await Console.findByIdAndUpdate(id, newConsole, { new: true });
 
         return res.status(200).json(update);
     } catch (error) {
