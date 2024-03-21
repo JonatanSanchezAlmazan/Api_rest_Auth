@@ -34,7 +34,6 @@ const loginUser = async(req, res, next) => {
         if (userExist) {
             if (bcrypt.compareSync(password, userExist.password)) {
                 const token = generateSign(userExist._id);
-                userExist.isLogin = true;
                 return res.status(200).json({ userExist, token })
             } else {
                 return res.status(400).json("Usario o contraseña incorrecto");
@@ -63,7 +62,7 @@ const getAllUsers = async(req, res, next) => {
 
 const getUserById = async(req, res, next) => {
     try {
-        console.log(req.params);
+
         const { id } = req.params;
         const user = await User.findById(id).populate("favoriteGame").select("-password -email");
         return res.status(200).json(user);
