@@ -49,7 +49,8 @@ const updateConsole = async(req, res, next) => {
         const oldConsole = await Console.findById(id);
         const newConsole = new Console(req.body);
         newConsole._id = id;
-        newConsole.videogames = [...oldConsole.videogames, ...req.body.videogames];
+        const videogames = req.body.videogames || [];
+        newConsole.videogames = [...oldConsole.videogames, ...videogames];
         const update = await Console.findByIdAndUpdate(id, newConsole, { new: true });
 
         return res.status(200).json(update);
