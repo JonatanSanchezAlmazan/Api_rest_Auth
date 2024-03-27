@@ -8,7 +8,12 @@ const userSchema = new mongoose.Schema({
     age: { type: Number, required: true },
     imageProfile: { type: String, required: true, default: "https://www.uncuidador.com/imagenes/perfil/pordefecto/perfil.png" },
     favoriteGame: [{ type: mongoose.Types.ObjectId, ref: "videogames" }],
-    rol: { type: String, required: true, enum: ["admin", "user"], default: "user" },
+    rol: {
+        type: String,
+        required: true,
+        enum: ["admin", "user"],
+        default: "user"
+    },
 
 
 }, {
